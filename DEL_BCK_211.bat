@@ -1,0 +1,8 @@
+forfiles -p "D:\bck\S2" -s -m *.* /D -1 /C "cmd /c del @path"
+forfiles -p "D:\bck\S1" -s -m *.* /D -1 /C "cmd /c del @path"
+forfiles -p "D:\bck\S3" -s -m *.* /D -1 /C "cmd /c del @path"
+forfiles -p "D:\bck\S4" -s -m *.* /D -1 /C "cmd /c del @path"
+forfiles -p "D:\bck\WH" -s -m *.* /D -1 /C "cmd /c del @path"
+forfiles -p "D:\bck\SR1" -s -m *.* /D -2 /C "cmd /c del @path"
+forfiles -p "D:\bck\Loyalty Manage" -s -m *.* /D -7 /C "cmd /c del @path"
+forfiles -p "D:\bck\HPMaster" -s -m *.* /D -7 /C "cmd /c del @path"
