@@ -8,8 +8,8 @@ Office Automation Scripts
 - **CleanupBackups.bat**  
   A batch script that deletes old files from multiple backup folders using the `forfiles` command. It quickly cleans specific folders and is ideal for straightforward folder cleanup on local or mapped drives.
 
-- **CleanupBackups_New.bat**  
-  An improved batch script that can delete old files only if the total file count in a folder exceeds a set threshold. This prevents accidental deletion in cases where a folder already has few files. It’s useful for log or backup directories where you want to maintain a minimum number of files.
+- **DailyUpdateCopy.bat**  
+  A batch script using `robocopy` to copy files modified within the last day from multiple source folders to corresponding destination folders. Ideal for automating daily file backups or synchronization tasks.
 
 ## Usage Notes
 
@@ -26,26 +26,27 @@ Update the folder paths in each `forfiles` command to match your backup folders,
 
     forfiles -p "D:\bck\S2" -s -m *.* /D -1 /C "cmd /c del @path"    REM <-- Change "D:\bck\S2" and other folder paths as needed
 
-### CleanupBackups_New.bat
+### DailyUpdateCopy.bat
 
-Edit these variables before running:
+Modify the source and destination folder paths for each `robocopy` line, for example:
 
-    set "folder=D:\bck\S2"         REM <-- Target folder path
-    set "maxCount=50"              REM <-- Minimum number of files to keep before deletion starts
-    set "daysOld=1"                REM <-- Files older than this number of days will be deleted
+    robocopy "Z:\Olax\Olax Automated Backup\Ambatenna" "Z:\Olax\New folder\Ambatenna" /s /maxage:1
 
-This script will first count the number of files in the folder. If the count is greater than `maxCount`, it will delete files older than `daysOld` days. Otherwise, no deletion occurs.
+- `/s` copies subdirectories excluding empty ones.  
+- `/maxage:1` copies only files modified within the last 1 day.
+
+You can add or remove lines as needed for different folders.
 
 ## Difference Between the Scripts
 
 - `DeleteOldFiles.vbs`  
-  Offers more control and recursive deletion through subfolders, making it ideal for network drives or complex folder structures.
+  Offers more control and recursive deletion through subfolders, ideal for network drives or complex folder structures.
 
 - `CleanupBackups.bat`  
   Uses the Windows `forfiles` command to quickly delete files in specified folders, suitable for simple and fast cleanup on local or mapped drives.
 
-- `CleanupBackups_New.bat`  
-  Adds a safety mechanism by checking file count before deletion. Best for scenarios where you want to keep a minimum number of files in a folder while still removing older ones.
+- `DailyUpdateCopy.bat`  
+  Copies recently modified files daily from source to destination folders, useful for backups and sync.
 
 ---
 
